@@ -8,7 +8,7 @@ import time, datetime
 
 
 def victory(schermo, counter):
-    pygame.mixer.music.load("Suoni/level_complete.mp3")
+    pygame.mixer.music.load("Suoni/level_complete.ogg")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play()
     fontVittoria = pygame.font.SysFont("Verdana", 34, italic=True)
