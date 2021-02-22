@@ -5,7 +5,7 @@ import livello_prova
 
 
 def colonnaSonora(volume):
-    pygame.mixer.music.load("Suoni/colonnaSonora.mp3")
+    pygame.mixer.music.load("Suoni/colonnaSonora.ogg")
     pygame.mixer.music.play(-1)   #play della colonna sonora -1 ---> indica per tempo infinito
     pygame.mixer.music.set_volume(volume)
 
