@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lvl.css">\
+    <script>
+        var f = 0;
+        var ricettaCorretta = new Array();
+        var ricettaUtente = new Array();
+        var p = 0;
+        var fl = 0;
+        var mxtempo = 60;
+        var tempo = 0;
+        var timer = 0;
+
+        function startLivello() {
+            document.getElementById("container").style.opacity = 1;
+            createMargerita();
+            tempo = mxtempo;
+            document.getElementById('secondi').innerHTML = tempo.toString();
+            timer = setInterval(function() {
+                tempo = tempo - 1;
+                document.getElementById('secondi').innerHTML = tempo.toString();
+                checkTempo(tempo);
+            }, 1000);
+            document.getElementById("startLvl").style.display = "none";
+        }
+
+        function restartLivello() {
+            document.getElementById("vittoria").style.display = "none";
+            startLivello();
+        }
+
+        function checkTempo(tempo) {
+            if (tempo == 0) {
+                document.getElementById("mexVit").innerHTML = "Hai esaurito il tempo!";
+                document.getElementById("punti").innerHTML = "Riprova";
+                document.getElementById("plsContinua").style.display = "none";
+                document.getElementById("plsRicomincia").style.display = "block";
+                document.getElementById("vittoria").style.display = "block";
+                clearInterval(timer);
+            } else if (fl == 1) {
+                clearInterval(timer);
+            }
+        }
+
+        function createMargerita() {
+            document.getElementById('pizzaImg').src = "../img/pizze/impasto.png";
+            document.getElementById('imgIngrediente').src = "../img/ordinazioni/lavagnaMargherita.png";
+            document.getElementById("pizzaImg").style.display = "block";
+            document.getElementById("mozzarella").style.display = "block";
+            document.getElementById("pomodoro").style.display = "block";
+            document.getElementById("salame").style.display = "none";
+
+            f = 0;
+            ricettaUtente = [];
+            ricettaCorretta = ["pomodoro", "mozzarella"];
+            p = 1;
+        }
+
+        function createSalame() {
+            document.getElementById('pizzaImg').src = "../img/pizze/impasto.png";
+            document.getElementById('imgIngrediente').src = "../img/ordinazioni/lavagnaSalame.png";
+            document.getElementById("pizzaImg").style.display = "block";
+            document.getElementById("mozzarella").style.display = "block";
+            document.getElementById("pomodoro").style.display = "block";
+            document.getElementById("salame").style.display = "block";
+
+            f = 0;
+            ricettaUtente = [];
+            ricettaCorretta = ["pomodoro", "mozzarella", "salame"];
+            p = 2;
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var ingTrascinato = ev.dataTransfer.getData("text");
+            addIngredienti(document.getElementById(ingTrascinato));
+        }
+
+        function addIngredienti(ingrediente) {
+            switch (ingrediente.id) {
+                case "pomodoro":
+                    if (ricettaCorretta[f] == ingrediente.id) {
+                        document.getElementById('pizzaImg').src = "../img/pizze/marinara.png";
+                        addIngrediente(ingrediente.id);
+                        document.getElementById(ingrediente.id).style.display = "none";
+                    } else {
+                        mexErrore();
+                    }
+                    break;
+                case "mozzarella":
+                    if (ricettaCorretta[f] == ingrediente.id) {
+                        document.getElementById('pizzaImg').src = "../img/pizze/margherita.png";
+                        addIngrediente(ingrediente.id);
+                        document.getElementById(ingrediente.id).style.display = "none";
+                    } else {
+                        mexErrore();
+                    }
+                    break;
+                case "salame":
+                    if (ricettaCorretta[f] == ingrediente.id) {
+                        document.getElementById('pizzaImg').src = "../img/pizze/pizzaSalame.png";
+                        addIngrediente(ingrediente.id);
+                        document.getElementById(ingrediente.id).style.display = "none";
+                    } else {
+                        mexErrore();
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            checkPizza();
+        }
+
+        function addIngrediente(ing) {
+            ricettaUtente.push(ing);
+            f = f + 1;
+        }
+
+        function mexErrore() {
+            alert("Hai sbagliato");
+        }
+
+        function checkPizza() {
+            if (ricettaUtente.length == ricettaCorretta.length && p == 1) { //Se p = 1 la pizza appena completata è la margherita
+                setTimeout(function() {
+                    alert("Hai completato la prima pizza, ora la seconda");
+                    createSalame();
+                }, 1500);
+            } else if (ricettaUtente.length == ricettaCorretta.length && p == 2) { //Se p = 2 la pizza appena completata è al salame
+                fl = 1;
+                calcolaPunteggio()
+                setTimeout(function() {
+                    document.getElementById("vittoria").style.display = "block";
+                    document.getElementById("plsContinua").style.display = "block";
+                    document.getElementById("plsRicomincia").style.display = "none";
+                }, 1000);
+            }
+        }
+
+        function calcolaPunteggio() {
+            document.getElementById("stella1").style.display = "flex";
+            if (tempo > 40 && tempo <= 60) {
+                document.getElementById("stella3").style.display = "flex";
+                document.getElementById("stella2").style.display = "flex";
+            } else if (tempo > 20 && tempo <= 40) {
+                document.getElementById("stella2").style.display = "flex";
+            }
+        }
+    </script>
+    <title>Livello 1</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="startLvl" onClick="startLivello()">
+            <p>PREMI PER INIZIARE IL LIVELLO</p>
+        </div>
+        <div id="ricetta">
+            <img src="../img/ordinazioni/lavagna.png" class="dim" id="imgIngrediente">
+        </div>
+        <div id="tagliere">
+            <img src="../img/strutturaLvl/tagliere.png" class="dim">
+            <div id="ingredienti">
+                <img src="../img/ingredienti/mozzarella.png" id="mozzarella" draggable="true" ondragstart="drag(event)">
+                <img src="../img/ingredienti/pomodoro.png" id="pomodoro" draggable="true" ondragstart="drag(event)">
+                <img src="../img/ingredienti/salame.png" id="salame" draggable="true" ondragstart="drag(event)">
+            </div>
+        </div>
+        <div id="contenitore">
+            <img src="../img/strutturaLvl/contenitore.png" class="dim">
+            <div id="pizza" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img src="" id="pizzaImg" class="dim">
+            </div>
+        </div>
+        <div id="tempo">
+            <img src="../img/strutturaLvl/orologio.png" class="dim">
+        </div>
+        <div id="secondi">
+            <p></p>
+        </div>
+        <div id="menu">
+            <img src="../img/strutturaLvl/menu.png" class="dim">
+        </div>
+        <div id="vittoria">
+            <div id="mexVit">
+                <p>HAI COMPLETATO IL LIVELLO!</p>
+            </div>
+            <div id="punti">
+                <img src="../img/strutturaLvl/stella.png" class="stelle" id="stella1">
+                <img src="../img/strutturaLvl/stella.png" class="stelle" id="stella2">
+                <img src="../img/strutturaLvl/stella.png" class="stelle" id="stella3">
+            </div>
+            <form action="http://127.0.0.1:3000/endLivello" method="POST">
+                <input type="button" name="continua" value="Continua" id="plsContinua" class="plsMen">
+                <input type="button" name="continua" value="Rigioca" id="plsRicomincia" class="plsMen" onclick="restartLivello()">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
