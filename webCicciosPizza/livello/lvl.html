@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="/css/pls.css">
+    <link rel="stylesheet" type='text/css' href="/css/menu.css">
+    <link rel="stylesheet" type='text/css' href="/css/struttura.css">
+    <script>
+        var maxTempo, tempo, f = 0;
+        var timer, tempoOff, pizza;
+        var ricettaUtente, ricettaCorretta = new Array();
+
+        var sndErrore = new Audio("/audio/sndErrore.mp3");
+        var sndVittoria = new Audio("/audio/sndVittoria.mp3");
+        var sndClick = new Audio("/audio/sndClick.mp3");
+
+        var numLivello = 1;
+
+        function clickSchermo() {
+            sndClick.play();
+        }
+
+        function startLivello() {
+            document.getElementById("startLvl").style.display = "none";
+            document.getElementById("containerLvl").style.opacity = 1;
+
+            switch (numLivello) {
+                case 1:
+                    maxTempo = 60;
+                    tempo = maxTempo;
+
+                    startTimer();
+
+                    createMargerita();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        function restartLivello() {
+            document.getElementById("menuVit").style.display = "none";
+            startLivello();
+        }
+
+        function openPause() {
+            document.getElementById("menuPausa").style.display = "block";
+            stopTimer();
+            document.getElementById("containerLvl").style.opacity = 0.6;
+        }
+
+        function closePause() {
+            document.getElementById("menuPausa").style.display = "none";
+            startTimer();
+            document.getElementById("containerLvl").style.opacity = 1;
+        }
+
+        function openImp(d) {
+            document.getElementById(d).style.display = "none";
+            document.getElementById("menuImp").style.display = "block";
+
+        }
+
+        function closeImp(d) {
+            document.getElementById("menuImp").style.display = "none";
+            document.getElementById(d).style.display = "block";
+        }
+
+        function startTimer() {
+            document.getElementById('txtSecondi').style.color = "#072b07";
+            document.getElementById('txtSecondi').innerHTML = tempo.toString();
+            tempoOff = false;
+
+            timer = setInterval(function() {
+                tempo = tempo - 1;
+                document.getElementById('txtSecondi').innerHTML = tempo.toString();
+
+                if (tempo < (maxTempo * 33.33) / 100) {
+                    document.getElementById('txtSecondi').style.color = "#ff0000";
+                } else if ((tempo >= (maxTempo * 33.33) / 100) && tempo < (maxTempo * 66.66) / 100) {
+                    document.getElementById('txtSecondi').style.color = "#ffa500";
+                }
+                checkTempo(tempo);
+            }, 1000);
+        }
+
+        function checkTempo() {
+            if (tempo == 0) {
+                stopTimer();
+                tempoOff = true;
+                endLivello();
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var ingTrascinato = ev.dataTransfer.getData("text");
+            addIngredienti(document.getElementById(ingTrascinato));
+        }
+
+        function createMargerita() {
+            document.getElementById('pizzaImg').src = "../img/pizze/impasto.png";
+            document.getElementById('imgOrdinazione').src = "../img/ordinazioni/lavagnaMargherita.png";
+            document.getElementById("pizzaImg").style.display = "block";
+            document.getElementById("mozzarella").style.display = "block";
+            document.getElementById("pomodoro").style.display = "block";
+            document.getElementById("salame").style.display = "none";
+
+            f = 0;
+            finita = false;
+            pizza = "margherita"
+            ricettaUtente = [];
+            ricettaCorretta = ["pomodoro", "mozzarella"];
+        }
+
+        function createSalame() {
+            document.getElementById('pizzaImg').src = "../img/pizze/impasto.png";
+            document.getElementById('imgOrdinazione').src = "../img/ordinazioni/lavagnaSalame.png";
+            document.getElementById("pizzaImg").style.display = "block";
+            document.getElementById("mozzarella").style.display = "block";
+            document.getElementById("pomodoro").style.display = "block";
+            document.getElementById("salame").style.display = "block";
+
+            f = 0;
+            finita = false;
+            pizza = "salame"
+            ricettaUtente = [];
+            ricettaCorretta = ["pomodoro", "mozzarella", "salame"];
+        }
+
+        function addIngredienti(ingrediente) {
+            switch (ingrediente.id) {
+                case "pomodoro":
+                    if (ricettaCorretta[f] == ingrediente.id) {
+                        document.getElementById('pizzaImg').src = "../img/pizze/marinara.png";
+                        addIngrediente(ingrediente.id);
+                        document.getElementById(ingrediente.id).style.display = "none";
+                    } else {
+                        sndErrore.play();
+                    }
+                    break;
+                case "mozzarella":
+                    if (ricettaCorretta[f] == ingrediente.id) {
+                        document.getElementById('pizzaImg').src = "../img/pizze/margherita.png";
+                        addIngrediente(ingrediente.id);
+                        document.getElementById(ingrediente.id).style.display = "none";
+                    } else {
+                        sndErrore.play();
+                    }
+                    break;
+                case "salame":
+                    if (ricettaCorretta[f] == ingrediente.id) {
+                        document.getElementById('pizzaImg').src = "../img/pizze/pizzaSalame.png";
+                        addIngrediente(ingrediente.id);
+                        document.getElementById(ingrediente.id).style.display = "none";
+                    } else {
+                        sndErrore.play();
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (isEnd()) {
+                nextPizza();
+            }
+
+        }
+
+        function addIngrediente(ing) {
+            ricettaUtente.push(ing);
+            f = f + 1;
+        }
+
+        function mexErrore() {
+            alert("Hai sbagliato");
+        }
+
+        function isEnd() {
+            if (ricettaUtente.length == ricettaCorretta.length) {
+                var finita = true;
+            } else {
+                var finita = false;
+            }
+            return finita;
+        }
+
+        function nextPizza() {
+            switch (numLivello) {
+                case 1:
+                    switch (pizza) {
+                        case "margherita":
+                            setTimeout(function() {
+                                createSalame();
+                            }, 1000);
+                            break;
+                        case "salame":
+                            setTimeout(function() {
+                                endLivello();
+                            }, 1000);
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function endLivello() {
+            if (tempoOff != true) { //tempoOff = false --> il livello è terminato correttamente
+                stopTimer();
+                calcolaPunteggio();
+                setTimeout(function() {
+                    document.getElementById("menuVit").style.display = "block";
+                    document.getElementById("plsContinua").style.display = "block";
+                    document.getElementById("plsRicomincia").style.display = "none";
+                    sndVittoria.play();
+                }, 1000);
+            } else { //tempoOff = true --> il livello è terminato a causa dell' esaurimento del tempo
+                document.getElementById("mexVit").innerHTML = "Hai esaurito il tempo!";
+                document.getElementById("punti").innerHTML = "Riprova";
+                document.getElementById("plsContinua").style.display = "none";
+                document.getElementById("plsRicomincia").style.display = "block";
+                document.getElementById("menuVit").style.display = "block";
+            }
+        }
+
+        function calcolaPunteggio() {
+            document.getElementById("stella1").style.display = "block";
+            if (tempo > (maxTempo * 33.33) / 100) {
+                document.getElementById("stella2").style.display = "block";
+                if (tempo > (maxTempo * 66.66) / 100) {
+                    document.getElementById("stella3").style.display = "block";
+                }
+            }
+        }
+    </script>
+    <title>Livello 1</title>
+</head>
+
+<body>
+
+    <div id="startLvl" onClick="startLivello()">
+        <p>PREMI PER INIZIARE IL LIVELLO</p>
+    </div>
+
+    <div id="containerLvl" onclick="clickSchermo()">
+        <div id="ricetta">
+            <img src="/img/ordinazioni/lavagna.png" id="imgOrdinazione">
+        </div>
+        <div id="tagliere">
+            <img src="/img/strutturaLvl/tagliere.png">
+            <div id="ingredienti">
+                <img src="/img/ingredienti/mozzarella.png" id="mozzarella" draggable="true" ondragstart="drag(event)">
+                <img src="/img/ingredienti/pomodoro.png" id="pomodoro" draggable="true" ondragstart="drag(event)">
+                <img src="/img/ingredienti/salame.png" id="salame" draggable="true" ondragstart="drag(event)">
+            </div>
+        </div>
+        <div id="contenitore">
+            <img src="/img/strutturaLvl/contenitore.png">
+            <div id="pizza" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <img src="" id="pizzaImg">
+            </div>
+        </div>
+        <div id="tempo">
+            <img src="/img/strutturaLvl/orologio.png">
+        </div>
+        <div id="secondi">
+            <strong>
+                <p id="txtSecondi"></p>
+            </strong>
+        </div>
+
+        <div id="pausa">
+            <img src="/img/strutturaLvl/pausa.png" id="imgPausa" onclick="openPause()">
+        </div>
+    </div>
+
+    <div id="menuVit" class="menuStd">
+        <div id="mexVit">
+            <p>HAI COMPLETATO IL LIVELLO!</p>
+        </div>
+        <div id="punti">
+            <img src="/img/strutturaLvl/stella.png" class="stelle" id="stella1">
+            <img src="/img/strutturaLvl/stella.png" class="stelle" id="stella2">
+            <img src="/img/strutturaLvl/stella.png" class="stelle" id="stella3">
+        </div>
+        <form action="http://127.0.0.1:3000/" method="GET">
+            <input type="submit" name="continua" value="Continua" id="plsContinua" class="plsMen">
+        </form>
+        <input type="button" name="continua" value="Rigioca" id="plsRicomincia" class="plsMen" onclick="restartLivello()">
+    </div>
+
+    <div id="menuPausa" class="menuStd">
+        <div id="mexPausa">
+            <p>MENU' DI PAUSA</p>
+        </div>
+        <input type="button" class="plsMen" id="plsBkLvl" value="Torna al livello" onclick="closePause()">
+        <br>
+        <input type="button" class="plsMen" id="lvlImp" value="Impostazioni" onclick="openImp('menuPausa')">
+        <form action="http://127.0.0.1:3000/" method="GET">
+            <input type="submit" class="plsMen" id="plsBkMen" value="Torna al menu">
+        </form>
+    </div>
+
+    <div id="menuImp" class="menuStd">
+        <div id="testo">
+            <p>Volume</p>
+        </div>
+        <input type="range" min="1" max="100" value="50" class="slider" id="mioRange">
+        <input type="button" name="tornaMenu" value="Torna al Menu'" id="plsBk" class="plsMen" onclick="closeImp('menuPausa')">
+    </div>
+
+
+</body>
+
+</html>

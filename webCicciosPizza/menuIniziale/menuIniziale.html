@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="/css/pls.css">
+    <link rel="stylesheet" type='text/css' href="/css//menu.css">
+    <link rel="stylesheet" type='text/css' href="/css/struttura.css">
+    <title>Ciccio's Pizza MenùIniziale</title>
+    <script>
+        f = 0;
+
+        function openDiv(a, b) {
+            document.getElementById(b).style.display = "block";
+            document.getElementById(a).style.display = "none";
+            f = 1;
+        }
+
+        function closeDiv(a, b) {
+            document.getElementById(b).style.display = "none";
+            document.getElementById(a).style.display = "block";
+        }
+
+        function cambiaSfondo() {
+            document.getElementById("containerMen").style = "background-image: url('" + document.getElementById("selectBg").value + "')"; //nei value delle options della select con id selectBg, mettiamo il percorso delle immagini
+        }
+    </script>
+</head>
+
+<body>
+    <div id="containerMen">
+
+        <div id="menuIntero" class="menuStd">
+            <img src='/img/logo.png' id="logo">
+            <input type="button" name="carriera" value="Carriera" id="plsCar" class="plsMen" onclick="openDiv('menuIntero', 'mapLvl')">
+
+            <form action="http://127.0.0.1:3000/giroPizza" method="get">
+                <input type="submit" name="giroPizza" value="Giro Pizza" id="plsGir" class="plsMen">
+            </form>
+
+            <input type="button" value="Impostazioni" id="plsImp" class="plsMen" onclick="openDiv('menuIntero', 'menuImp')">
+        </div>
+
+        <div id="menuImp" class="menuStd">
+            <div id="testo">
+                <p>Volume</p>
+            </div>
+            <input type="range" min="1" max="100" value="50" class="slider" id="mioRange">
+            <input type="button" name="tornaMenu" value="Torna al Menu'" id="plsBk" class="plsMen" onclick="closeDiv('menuIntero', 'menuImp')">
+            <select id="selectBg" class="plsMen">
+                    <option value="/img/sfondi/bgBlu.png" id="blu">Sfondo Blu</option>
+                    <option value="/img/sfondi/bgGrigio.png" id="grigio">Sfondo Grigio</option>
+                </select>
+            <input type="button" name="plsBg" value="Applica Sfondo" id="plsBg" class="plsMen" onclick="cambiaSfondo()">
+        </div>
+
+        <div id="mapLvl">
+            <form action="http://127.0.0.1:3000/livello1" method="get">
+                <img src="/img/menuLvl/livello1.png" id="imgLvl1" class="imgLvl" onclick="submit()">
+            </form>
+
+            <form action="http://127.0.0.1:3000/livello2" method="get">
+                <img src="/img/menuLvl/livello2.png" id="imgLvl2" class="imgLvl" onclick="submit()">
+            </form>
+
+            <form action="http://127.0.0.1:3000/livello3" method="get">
+                <img src="/img/menuLvl/livello3.png" id="imgLvl3" class="imgLvl" onclick="submit()">
+            </form>
+
+            <form action="http://127.0.0.1:3000/livello4" method="get">
+                <img src="/img/menuLvl/livello4.png" id="imgLvl4" class="imgLvl" onclick="submit()">
+            </form>
+
+            <form action="http://127.0.0.1:3000/livello5" method="get">
+                <img src="/img/menuLvl/livello5.png" id="imgLvl5" class="imgLvl" onclick="submit()">
+            </form>
+
+            <form action="http://127.0.0.1:3000/tutorial" method="get">
+                <img src="/img/menuLvl/tutorial.png" id="tutorial" onclick="submit()">
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

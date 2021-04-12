@@ -1,0 +1,107 @@
+.plsMen {
+    width: 150px;
+    height: 50px;
+    background-color: burlywood;
+    text-align: center;
+}
+
+
+/*IMPOSTAZIONI*/
+
+#plsImp {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    margin: auto;
+}
+
+#selectBg {
+    width: 185px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 200px;
+    bottom: 100px;
+    margin: auto;
+}
+
+#plsBg {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    right: 0;
+    bottom: 100px;
+    margin: auto;
+}
+
+#plsBk {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 10px;
+    margin: auto;
+}
+
+
+/*MENU INIZIALE*/
+
+#plsCar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    margin: auto;
+}
+
+#plsGir {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 160px;
+    margin: auto;
+}
+
+
+/*LIVELLO*/
+
+#plsContinua {
+    margin: 0px auto;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+}
+
+#plsRicomincia {
+    margin: 0px auto;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 100px;
+    display: none;
+}
+
+#plsBkLvl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 250px;
+    margin: auto;
+}
+
+#plsBkMen {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    margin: auto;
+}
+
+#lvlImp {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 175px;
+    margin: auto;
+}

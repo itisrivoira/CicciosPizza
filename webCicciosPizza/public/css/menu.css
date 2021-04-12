@@ -1,0 +1,99 @@
+.menuStd {
+    height: 300px;
+    width: 200px;
+    border: solid;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    padding-left: 75px;
+    padding-right: 75px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: burlywood;
+    text-align: center;
+}
+
+
+/*MENU INIZIALE*/
+
+#menuIntero {
+    height: 400px;
+    width: 200px;
+}
+
+
+/*MENU INIZIALE: impostazioni*/
+
+#menuImp {
+    display: none;
+}
+
+#testo {
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    bottom: 0;
+    top: 10px;
+    margin: auto;
+}
+
+
+/*MENU LIVELLI*/
+
+#mapLvl {
+    width: 75%;
+    height: 90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background-image: url("/img/sfondi/mappaBg.png");
+    border: solid;
+    display: none;
+}
+
+
+/*LIVELLO: vittoria*/
+
+.stelle {
+    width: 50px;
+    height: 50px;
+    display: none
+}
+
+#menuVit {
+    display: none;
+}
+
+#mexVit {
+    margin: 0px auto;
+    text-align: center;
+}
+
+#punti {
+    display: flex;
+    justify-content: center;
+    margin: 0px auto;
+    text-align: center;
+}
+
+
+/*LIVELLO: pausa*/
+
+#menuPausa {
+    display: none;
+}
+
+#mexPausa {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 320px;
+    margin: auto;
+}
