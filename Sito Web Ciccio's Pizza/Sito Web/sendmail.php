@@ -1,29 +1,29 @@
 <?php
     $errorMSG = "";
 
-    // NAME
+    // Nome
     if (empty($_POST["name"])) {
         $errorMSG = "Name is required ";
     } else {
         $name = $_POST["name"];
     }
 
-    // EMAIL
+    // Mail
     if (empty($_POST["email"])) {
         $errorMSG .= "Email is required ";
     } else {
         $email = $_POST["email"];
     }
 
-    // MESSAGE
+    // Messaggio
     if (empty($_POST["message"])) {
         $errorMSG .= "Message is required ";
     } else {
         $message = $_POST["message"];
     }
 
-    if($_POST["Message"]) {
-        $EmailTo = "alessandro.lopez320@gmail.com";
+    if($_POST["message"]) {
+        $EmailTo = "ciccios.pizza.itis@gmail.com";
         $Subject = "Messaggio dal sito";
 
         $Body = "";

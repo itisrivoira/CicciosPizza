@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Ciccio's Pizza</title>
+		
+		<link rel="shortcut icon" href="images/chef.png" type="image/x-icon">
+		<link rel="apple-touch-icon" href="images/chef.png">
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">    
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+
+	<body>
+		<header class="top-navbar">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container">
+					<a class="navbar-brand" href="index.php">
+						<img src="images/logo.png" alt="" width="142" height="117"/>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbars-rs-food">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="aboutus.php">Chi siamo</a></li>
+							<li class="nav-item"><a class="nav-link" href="rules.php">Regole</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.php">Contattaci</a></li>
+							<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="gioco.zip">Download</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<div id="slides" class="cover-slides">
+			<ul class="slides-container">
+				<li class="text-left">
+					<img src="images/sfondoBlu.png" alt="">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h1 class="m-b-20"><strong>Ciccio's Pizza</strong></h1>
+								<p class="m-b-40">Miglior gioco di pizzeria mai creato</p>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li class="text-left">
+					<img src="images/homepage.png" alt=""> 
+				</li>
+				<li class="text-left">
+					<img src="images/slider-03.png" alt=""> 
+				</li>
+			</ul>
+		</div>
+
+		<div class="about-section-box">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-12 text-center">
+						<div class="inner-column">
+							<h1><span>Descrizione del gioco</span></h1>
+							<p>Imparerete a fare la pizza in men che non si dica e diventerete dei pizzaioli con la P maiuscola !</p>
+							<p>In questo gioco dovrete comporre le pizze seguendo un ordine stabilito degli ingredienti entro un tempo stabilito.</p>
+							<p>Non farti prendere dall'ansia e ricordati che l'importante è divertirsi !</p>
+							<p>Adatto a tutte le età.</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						<img src="images/primoLivello.png" alt="" class="img-fluid">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br><br>
+
+		<footer class="footer-area bg-f">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<h3>Per contattarci</h3>
+						<p><b>Chiabrando Lorenzo</b></p>
+						<p>Bonagemma Alberto</p>
+						<p>Lopez Alessandro</p>
+						<p>Tenca Francesco</p>
+						<p>Hila Flavian</p>
+						<br>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<h3><br></h3>
+						<p>lorenzo.chiabrando02@gmail.com</p>
+						<p>albibonagemma@gmail.com</p>
+						<p>alessandro.lopez320@gmail.com</p>
+						<p>frate022@gmail.com</p>
+						<p>flavianhila@gmail.com</p>
+					</div>
+					<div class="col-lg-12 col-md-12">
+						<h3>I Nostri social</h3>
+						<ul class="list-inline f-social">
+							<li class="list-inline-item"><a href="https://facebook.com"><i class="fa fa-facebook"></i></a></li>
+							<li class="list-inline-item"><a href="https://instagram.com"><i class="fa fa-instagram"></i></a></li>
+							<li class="list-inline-item"><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<br><br>
+		</footer>
+
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.superslides.min.js"></script>
+		<script src="js/superslide.js"></script>
+	</body>
+</html>
